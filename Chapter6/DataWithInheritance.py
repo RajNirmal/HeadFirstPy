@@ -10,21 +10,17 @@ def sanitize(data):
     (mins,sec) = data.strip().split(splitter)
     return (mins+'.'+sec)
 
-class Athlete:
+class Athlete(list):
     def __init__(self,name , DOB = None, Times = []):
+        list.__init__([])
         self.name = name
         self.DOB = DOB
-        self.Times = Times
+        self.extend = Times
     
     def Top3Times(self):
-        return sorted(sanitize(each_t) for each_t in self.Times)[0:3]
+        return sorted(sanitize(each_t) for each_t in self)[0:3]
 
-    def add_Time(self, time):
-        self.Times.append(time)
-    
-    def add_Times(self, time=[]):
-        self.Times.extend(time)
-
+   
 """This is a function to read the data from the 
     disk and will return a list containing 
     the times"""
@@ -48,7 +44,7 @@ jamesDict = getData("james")
 julieDict = getData("julie")
 mikeyDict = getData("mikey")
 printStuff(sarahDict)
-sarahDict.add_Time('2.10')
+sarahDict.append('2.10')
 printStuff(sarahDict)
-sarahDict.add_Times(['2.01','2.11'])
+sarahDict.extend(['2.01','2.11'])
 printStuff(sarahDict)
