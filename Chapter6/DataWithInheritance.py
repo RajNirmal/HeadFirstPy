@@ -10,12 +10,12 @@ def sanitize(data):
     (mins,sec) = data.strip().split(splitter)
     return (mins+'.'+sec)
 
-class Athlete(list):
+class AthleteList(list):
     def __init__(self,name , DOB = None, Times = []):
         list.__init__([])
         self.name = name
         self.DOB = DOB
-        self.extend = Times
+        self.extend(Times)
     
     def Top3Times(self):
         return sorted(sanitize(each_t) for each_t in self)[0:3]
@@ -34,7 +34,7 @@ def getData(filename):
     Name = myData.pop(0)
     DOB = myData.pop(0)
     Times = myData
-    return Athlete(Name,DOB,Times)
+    return AthleteList(Name,DOB,Times)
 
 def printStuff(dickDict):
     print("The fastest times of "+dickDict.name+"\nThe date of birth is "+dickDict.DOB+"\nThe fastest times are "+str(dickDict.Top3Times()))
